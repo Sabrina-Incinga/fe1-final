@@ -1,18 +1,29 @@
 import './paginacion.css';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { accionPagina } from '../../redux/personajeSlice';
 
 /**
  * Componente que contiene los botones para paginar
  * 
- * Deberás agregar las propiedades necesarias para que funcione correctamente
  * 
  * 
  * @returns un JSX element 
  */
 const Paginacion = () => {
+    const dispatch = useAppDispatch()
+    const pagina = useAppSelector(state => state.personaje.pagina)
+
+    const clickSiguiente = () => {
+        dispatch(accionPagina(1))
+    }
+
+    const clickAnterior = () => {
+        dispatch(accionPagina(-1))
+    }
 
     return <div className="paginacion">
-        <button disabled={true} className={"primary"}>Anterior</button>
-        <button disabled={false} className={"primary"}>Siguiente</button>
+        <button disabled={pagina === 1} className={"primary"} onClick={clickAnterior}>Anterior</button>
+        <button disabled={false} className={"primary"} onClick={clickSiguiente}>Siguiente</button>
     </div>
 }
 
