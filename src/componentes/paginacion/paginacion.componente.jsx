@@ -12,6 +12,7 @@ import { accionPagina } from '../../redux/personajeSlice';
 const Paginacion = () => {
     const dispatch = useAppDispatch()
     const pagina = useAppSelector(state => state.personaje.pagina)
+    const next = useAppSelector(state => state.personaje.siguiente)
 
     const clickSiguiente = () => {
         dispatch(accionPagina(1))
@@ -23,7 +24,7 @@ const Paginacion = () => {
 
     return <div className="paginacion">
         <button disabled={pagina === 1} className={"primary"} onClick={clickAnterior}>Anterior</button>
-        <button disabled={false} className={"primary"} onClick={clickSiguiente}>Siguiente</button>
+        <button disabled={next === null} className={"primary"} onClick={clickSiguiente}>Siguiente</button>
     </div>
 }
 

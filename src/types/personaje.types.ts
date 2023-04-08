@@ -16,6 +16,6 @@ export interface personaje{
         image: string,
         episode: string[],
         url: string,
-        created: string
-      
+        created: string,
+        esFavorito: boolean
 }

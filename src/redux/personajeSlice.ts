@@ -1,22 +1,22 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { personaje } from "../types/personaje.types"
-import { getPersonajes, getPersonajesPorNombre } from "../services/personaje.service"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { personaje } from "../types/personaje.types";
+import { getPersonajes, getPersonajesPorNombre } from "../services/personaje.service";
 
 export const fetchPersonajes = createAsyncThunk(
     "/fetchPersonajes",
     async (page: number) => {
-      const response = await getPersonajes(page)
-      return response
+      const response = await getPersonajes(page);
+      return response;
     }
-)
+);
 
 export const fetchPersonajesPorNombre = createAsyncThunk(
   "/fetchPersonajesPorNombre",
-  async ({ nombre, page }: { nombre: string, page: number }) => {
-    const response = await getPersonajesPorNombre(page, nombre)
-    return response
+  async ({ nombre, pagina }: { nombre: string, pagina: number }) => {
+    const response = await getPersonajesPorNombre(pagina, nombre);
+    return response;
   }
-)
+);
 
 
 interface InitialType{
@@ -26,7 +26,8 @@ interface InitialType{
     pagina: number
     error: string | undefined
     personajeSeleccionado: personaje
-}
+    siguiente: string | null
+};
 
 const initialState : InitialType = {
     busqueda: '',
@@ -52,48 +53,68 @@ const initialState : InitialType = {
         image: '',
         episode: [],
         url: '',
-        created: ''
-      
-}
-}
+        created: '',
+        esFavorito: false
+    },
+    siguiente: null
+};
 
 export const personajeSlice = createSlice({
     name: 'personaje',
     initialState,
     reducers:{
       accionBusqueda: (state, action) => {
-        state.busqueda = action.payload
+        state.busqueda = action.payload;
       },
       accionFavoritos: (state, action) => {
-        if(state.favoritos.find(f => f.id === action.payload.id)){
-          state.favoritos = state.favoritos.filter(f => f.id!== action.payload.id)
-        } else state.favoritos.push(action.payload)
+        const personaje = state.personajes.find(f => f.id === action.payload.id)
+        if (personaje) {
+          personaje.esFavorito = !personaje.esFavorito;
+        }
+        
+        if(action.payload.esFavorito){
+          state.favoritos = state.favoritos.filter(f => f.id!== action.payload.id);
+        } else if(personaje) {
+          state.favoritos.push(personaje);
+        }
       },
       accionSeleccionado: (state, action) => {
-        state.personajeSeleccionado = action.payload
+        state.personajeSeleccionado = action.payload;
       },
       accionPagina: (state, action) => {
-        state.pagina += action.payload
+        state.pagina += action.payload;
       }
     },
     extraReducers: builder => {
       builder.addCase(fetchPersonajes.fulfilled, (state, action) => {
-        state.personajes = action.payload
-        state.error = ""
+        const personajes = action.payload.results.map(pers =>{
+          const esFavorito = state.favoritos.some(persona => persona.id === pers.id)
+          pers.esFavorito = esFavorito
+          return pers
+        });
+        state.siguiente = action.payload.info.next;
+        state.personajes = personajes;
+        state.error = "";
       })
       builder.addCase(fetchPersonajes.rejected, (state, action) => {
-        state.error = action.error.message
+        state.error = action.error.message;
       })
       builder.addCase(fetchPersonajesPorNombre.fulfilled, (state, action) => {
-        state.personajes = action.payload
-        state.error = ""
+        const personajes = action.payload.results.map(pers =>{
+          const esFavorito = state.favoritos.some(persona => persona.id === pers.id)
+          pers.esFavorito = esFavorito
+          return pers
+        });
+        state.siguiente = action.payload.info.next;
+        state.personajes = personajes;
+        state.error = "";
       })
       builder.addCase(fetchPersonajesPorNombre.rejected, (state, action) => {
-        state.error = action.error.message
+        state.error = action.error.message;
       })
     }
 })
 
-export const { accionBusqueda, accionFavoritos, accionSeleccionado, accionPagina } = personajeSlice.actions
+export const { accionBusqueda, accionFavoritos, accionSeleccionado, accionPagina } = personajeSlice.actions;
 
-export default personajeSlice.reducer
+export default personajeSlice.reducer;
