@@ -14,6 +14,8 @@ import TarjetaEpisodio from "../componentes/episodios/tarjeta-episodio.component
  * @returns la pagina de detalle
  */
 const PaginaDetalle = () => {
+
+
     return <div className="container">
         <h3>Rick Sanchez</h3>
         <div className={"detalle"}>
@@ -25,7 +27,7 @@ const PaginaDetalle = () => {
                     <p>Planeta: Earth</p>
                     <p>Genero: Male</p>
                 </div>
-                <BotonFavorito esFavorito={false} />
+                <BotonFavorito esFavorito={false} onClick={() => {}} />
             </div>
         </div>
         <h4>Lista de episodios donde apareció el personaje</h4>

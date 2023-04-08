@@ -8,6 +8,7 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
 const container = document.getElementById('root');
+if (!container) throw new Error('Failed to find the root element');
 
 const root = ReactDOMClient.createRoot(container);
 
