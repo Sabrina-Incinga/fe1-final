@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
  * 
  * @param {props} personaje - personaje para mostrar en la tarjeta
  * 
- * @returns {JSX.Element} un JSX element 
+ * @returns {JSX.Element} un JSX de una tarjeta para mostrar un personaje 
  */
 
 interface props{

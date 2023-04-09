@@ -90,7 +90,7 @@ export const personajeSlice = createSlice({
         state.personajeSeleccionado = action.payload;
       },
       accionPagina: (state, action) => {
-        state.pagina += action.payload;
+        action.payload === 'reset' ? state.pagina = 1 :state.pagina += action.payload;
       }
     },
     extraReducers: builder => {

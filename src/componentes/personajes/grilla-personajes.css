@@ -1,6 +1,18 @@
 .grilla-personajes {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   justify-items: center;
+}
+
+@media screen and (max-width:1280px) {
+  .grilla-personajes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width:540px) {
+  .grilla-personajes {
+    grid-template-columns: 1fr;
+  }
 }

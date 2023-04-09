@@ -7,7 +7,7 @@ import { getEpisodio } from '../../services/personaje.service';
  * 
  * @param {props} espisodioUrl url del episodio
  * 
- * @returns {JSX.Element} un JSX element 
+ * @returns {JSX.Element} un JSX de una tarjeta para mostrar un episodio 
  */
 
 interface props{
