@@ -1,40 +1,43 @@
 import "./Detalle.css";
 import BotonFavorito from "../componentes/botones/boton-favorito.componente";
 import TarjetaEpisodio from "../componentes/episodios/tarjeta-episodio.componente";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { accionFavoritos } from "../redux/personajeSlice";
 
 /**
  * Esta es la pagina de detalle. Aqui se puede mostrar la vista sobre el personaje seleccionado junto con la lista de episodios en los que aparece
  * 
  * 
- * 
- * 
  * Uso: 
  * ``` <PaginaDetalle /> ```
  * 
- * @returns la pagina de detalle
+ * @returns {JSX.Element} la pagina de detalle
  */
-const PaginaDetalle = () => {
+const PaginaDetalle = (): JSX.Element => {
+    const personaje = useAppSelector(state => state.personaje.personajeSeleccionado);
+    const dispatch = useAppDispatch();
 
+    const marcarFavorito = () => {
+        dispatch(accionFavoritos (personaje));
+    }
 
     return <div className="container">
         <h3>Rick Sanchez</h3>
         <div className={"detalle"}>
             <div className={"detalle-header"}>
-                <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick Sanchez"/>
+                <img src={personaje?.image} alt={`Foto de ${personaje?.name}`}/>
                 <div className={"detalle-header-texto"}>
 
-                    <p>Rick Sanchez</p>
-                    <p>Planeta: Earth</p>
+                    <p>{personaje?.name}</p>
+                    <p>Planeta: {personaje?.location.name}</p>
                     <p>Genero: Male</p>
                 </div>
-                <BotonFavorito esFavorito={false} onClick={() => {}} />
+                <BotonFavorito esFavorito={personaje.esFavorito} onClick={marcarFavorito} />
             </div>
         </div>
         <h4>Lista de episodios donde apareció el personaje</h4>
         <div className={"episodios-grilla"}>
-            <TarjetaEpisodio />
-            <TarjetaEpisodio />
-            <TarjetaEpisodio />
+            {personaje.episode.map((ep: string, index:number) => <TarjetaEpisodio key={index} episodioUrl={ep}/>)}
         </div>
     </div>
 }

@@ -7,9 +7,9 @@ import { accionPagina } from '../../redux/personajeSlice';
  * 
  * 
  * 
- * @returns un JSX element 
+ * @returns {JSX.Element} un JSX element 
  */
-const Paginacion = () => {
+const Paginacion = (): JSX.Element => {
     const dispatch = useAppDispatch()
     const pagina = useAppSelector(state => state.personaje.pagina)
     const next = useAppSelector(state => state.personaje.siguiente)

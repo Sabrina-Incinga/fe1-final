@@ -7,9 +7,9 @@ import './filtros.css';
  * Componente para realizar la búsqueda por nombre
  * 
  * 
- * @returns un JSX element 
+ * @returns {JSX.Element} un JSX element 
  */
-const Filtros = () => {
+const Filtros = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const cambio = (e:ChangeEvent<HTMLInputElement>) => {

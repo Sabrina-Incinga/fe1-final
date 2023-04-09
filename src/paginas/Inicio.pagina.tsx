@@ -8,9 +8,9 @@ import Paginacion from "../componentes/paginacion/paginacion.componente";
  * Uso: 
  * ``` <PaginaInicio /> ```
  * 
- * @returns la pagina de inicio
+ * @returns {JSX.Element} la pagina de inicio
  */
-const PaginaInicio = () => {
+const PaginaInicio = (): JSX.Element => {
     return <div className="container">
         <div className="actions">
             <h3>Catálogo de Personajes</h3>

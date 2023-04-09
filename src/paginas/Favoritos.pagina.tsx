@@ -6,9 +6,9 @@ import GrillaPersonajes from "../componentes/personajes/grilla-personajes.compon
  * Uso: 
  * ``` <PaginaFavoritos /> ```
  * 
- * @returns la pagina de favoritos
+ * @returns {JSX.Element} la pagina de favoritos
  */
-const PaginaFavoritos = () => {
+const PaginaFavoritos = (): JSX.Element => {
     return <div className="container">
         <div className="actions">
             <h3>Personajes Favoritos</h3>

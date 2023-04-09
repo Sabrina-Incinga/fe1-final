@@ -1,19 +1,27 @@
+import { useQuery } from 'react-query';
 import './tarjeta-episodio.css';
+import { getEpisodio } from '../../services/personaje.service';
 
 /**
  * Tarjeta para cada episodio dentro de la vista de personaje.
  * 
+ * @param {props} espisodioUrl url del episodio
  * 
- * 
- * @returns un JSX element 
+ * @returns {JSX.Element} un JSX element 
  */
-const TarjetaEpisodio = () => {
+
+interface props{
+    episodioUrl:string
+}
+
+const TarjetaEpisodio = ({episodioUrl}:props): JSX.Element => {
+    const {data} = useQuery(['getEpisodio', episodioUrl], () => getEpisodio(episodioUrl));
 
     return <div className="tarjeta-episodio">
-            <h4>Close Rick-counters of the Rick Kind</h4>
+            <h4>{data?.name}</h4>
             <div>
-                <span>S01E01</span>
-                <span>Lanzado el: April 7, 2014</span>
+                <span>{data?.episode}</span>
+                <span>Lanzado el: {data?.air_date}</span>
             </div>
     </div>
 }

@@ -67,14 +67,22 @@ export const personajeSlice = createSlice({
         state.busqueda = action.payload;
       },
       accionFavoritos: (state, action) => {
-        const personaje = state.personajes.find(f => f.id === action.payload.id)
+        const id = action.payload.id;
+        const esFavorito = action.payload.esFavorito;
+        const personajes = state.personajes;
+        const personaje = personajes.find((f) => f.id === id);
+
         if (personaje) {
           personaje.esFavorito = !personaje.esFavorito;
         }
-        
-        if(action.payload.esFavorito){
-          state.favoritos = state.favoritos.filter(f => f.id!== action.payload.id);
-        } else if(personaje) {
+
+        if (id === state.personajeSeleccionado.id) {
+          state.personajeSeleccionado.esFavorito = !state.personajeSeleccionado.esFavorito;
+        }
+
+        if (esFavorito) {
+          state.favoritos = state.favoritos.filter((f) => f.id !== id);
+        } else if (personaje) {
           state.favoritos.push(personaje);
         }
       },
@@ -88,9 +96,9 @@ export const personajeSlice = createSlice({
     extraReducers: builder => {
       builder.addCase(fetchPersonajes.fulfilled, (state, action) => {
         const personajes = action.payload.results.map(pers =>{
-          const esFavorito = state.favoritos.some(persona => persona.id === pers.id)
-          pers.esFavorito = esFavorito
-          return pers
+          const esFavorito = state.favoritos.some(persona => persona.id === pers.id);
+          pers.esFavorito = esFavorito;
+          return pers;
         });
         state.siguiente = action.payload.info.next;
         state.personajes = personajes;
@@ -101,9 +109,9 @@ export const personajeSlice = createSlice({
       })
       builder.addCase(fetchPersonajesPorNombre.fulfilled, (state, action) => {
         const personajes = action.payload.results.map(pers =>{
-          const esFavorito = state.favoritos.some(persona => persona.id === pers.id)
-          pers.esFavorito = esFavorito
-          return pers
+          const esFavorito = state.favoritos.some(persona => persona.id === pers.id);
+          pers.esFavorito = esFavorito;
+          return pers;
         });
         state.siguiente = action.payload.info.next;
         state.personajes = personajes;

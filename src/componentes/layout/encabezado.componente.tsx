@@ -8,7 +8,7 @@ import './encabezado.css';
  *
  * @returns {JSX.Element}
  */
-const Encabezado = () => {
+const Encabezado = (): JSX.Element => {
 
     return <header>
             <div>
@@ -19,7 +19,6 @@ const Encabezado = () => {
                     <ul>
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/favoritos">Favoritos</Link></li>
-                        <li><Link to="/detalle">Detalle</Link></li>
                     </ul>
                 </nav>
             </div>

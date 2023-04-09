@@ -11,9 +11,9 @@ import { personaje } from '../../types/personaje.types';
  * 
  * 
  * 
- * @returns un JSX element 
+ * @returns {JSX.Element} un JSX element 
  */
-const GrillaPersonajes = () => {
+const GrillaPersonajes = (): JSX.Element => {
     let location = useLocation();
     const dispatch = useAppDispatch();
     const personajes = useAppSelector(state => state.personaje.personajes);

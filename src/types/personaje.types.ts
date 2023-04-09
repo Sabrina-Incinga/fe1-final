@@ -19,3 +19,14 @@ export interface personaje{
         created: string,
         esFavorito: boolean
 }
+
+export interface episodio{
+  id: number,
+  name: string,
+  air_date: string,
+  episode: string,
+  characters: string[],
+  url: string,
+  created: string
+}
+
