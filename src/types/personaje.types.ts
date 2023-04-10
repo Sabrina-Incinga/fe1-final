@@ -1,3 +1,26 @@
+/**
+ * @typedef {object} data 
+ * @property {string} name
+ * @property {string} url
+ */
+
+/**
+ * @typedef {object} personaje
+ * @property {number} id
+ * @property {string} name
+ * @property {string} status
+ * @property {string} species
+ * @property {string} type
+ * @property {string} gender
+ * @property {data} origin
+ * @property {data} location
+ * @property {string} image
+ * @property {string[]} episode
+ * @property {string} url
+ * @property {string} created
+ * @property {boolean} esFavorito
+ */
+
 export interface personaje{
         id: number,
         name: string,
@@ -20,6 +43,16 @@ export interface personaje{
         esFavorito: boolean
 }
 
+/**
+ * @typedef {object} episodio
+ * @property {number} id
+ * @property {string} name
+ * @property {string} air_date
+ * @property {string} episode
+ * @property {string[]} characters
+ * @property {string} url
+ * @property {string} created
+ */
 export interface episodio{
   id: number,
   name: string,

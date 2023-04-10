@@ -3,6 +3,7 @@ import { episodio } from "../types/personaje.types";
 
 
 /**
+ * Función asíncrona que hace llamada a la api de Rick y Morty para obtener los personajes paginados
  * 
  * @param {number} pagina número de página
  * @returns {response} un objeto que contiene un array de personajes y los datos de las páginas siguiente y anterior
@@ -15,6 +16,7 @@ export const getPersonajes = async (pagina:number): Promise<response> => {
 }
 
 /**
+ * Función asíncrona que hace llamada a la api de Rick y Morty para obtener personajes paginados, filtrados por nombre del mismo
  * 
  * @param {number} pagina número de página
  * @param {string} nombre nombre del personaje a buscar
@@ -28,8 +30,9 @@ export const getPersonajesPorNombre = async (pagina:number, nombre:string):Promi
 }
 
 /**
+ * Función asíncrona que hace llamada a la api de Rick y Morty para obtener los episodios por id
  * 
- * @param {number} id el id del episodio a buscar
+ * @param {string} url Url del episodio a buscar, incluye el id del episodio
  * @returns {episodio} los datos del episodio bucado
  */
 export const getEpisodio = async (url:string):Promise<episodio> => {

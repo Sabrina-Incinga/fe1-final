@@ -2,6 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { personaje } from "../types/personaje.types";
 import { getPersonajes, getPersonajesPorNombre } from "../services/personaje.service";
 
+/**
+ * Thunk que maneja el llamado a la api para obtener los personajes paginados
+ */
 export const fetchPersonajes = createAsyncThunk(
     "/fetchPersonajes",
     async (page: number) => {
@@ -10,6 +13,9 @@ export const fetchPersonajes = createAsyncThunk(
     }
 );
 
+/**
+ * Thunk que maneja el llamado a la api para obtener los personajes paginados fitrados por nombre
+ */
 export const fetchPersonajesPorNombre = createAsyncThunk(
   "/fetchPersonajesPorNombre",
   async ({ nombre, pagina }: { nombre: string, pagina: number }) => {
@@ -29,6 +35,16 @@ interface InitialType{
     siguiente: string | null
 };
 
+/**
+ * @typedef {object} state - estado almacenado en store
+ * @property {string} busqueda - parámetro para realizar la búsqueda por nombre
+ * @property {personaje[]} personajes - array que contiene los personajes que devuelve la api
+ * @property {personaje[]} favoritos - array que contiene los personajes marcados como favoritos
+ * @property {number} pagina - número de página consultada a la api
+ * @property {string | undefined} error - captura del error en caso de fallo de la api
+ * @property {personaje} personajeSeleccionado - personaje seleccionado para visualizar en la página de detalles
+ * @property {string | null} siguiente - captura el string de la url de la página siguiente 
+ */
 const initialState : InitialType = {
     busqueda: '',
     personajes: [],
