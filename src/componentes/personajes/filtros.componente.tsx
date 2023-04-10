@@ -13,6 +13,11 @@ const Filtros = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const buscador = useAppSelector(state => state.personaje.busqueda)
 
+    /**
+     * Función que captura los cambios en el valor del input y los almacena en el store Personaje.Busqueda
+     * 
+     * @param {ChangeEvent<HTMLInputElement>} e evento de cambio en el input 
+     */
     const cambio = (e:ChangeEvent<HTMLInputElement>) => {
         dispatch(accionBusqueda(e.target.value));
     }

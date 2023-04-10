@@ -4,7 +4,7 @@ import './boton-favorito.css';
  * 
  * @param {props} - objeto de dos atributos: esFavorito, boolean que indica si el personaje es marcado como favorito o no, y onClick, función para manejar el cambio de esFavorito
  * 
- * @returns un JSX element 
+ * @returns un JSX Con un botón que indica si un personaje es favorito o no 
  */
 interface props{
     esFavorito: boolean

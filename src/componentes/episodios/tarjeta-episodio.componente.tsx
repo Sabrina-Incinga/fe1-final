@@ -15,7 +15,19 @@ interface props{
 }
 
 const TarjetaEpisodio = ({episodioUrl}:props): JSX.Element => {
-    const {data} = useQuery(['getEpisodio', episodioUrl], () => getEpisodio(episodioUrl));
+    const {data, isLoading, isError} = useQuery(['getEpisodio', episodioUrl], () => getEpisodio(episodioUrl));
+
+    if(isLoading){
+        return <div>
+            <p>Cargando...</p>
+        </div>
+    }
+
+    if(isError){
+        return <div>
+            <p>No se pudo cargar la información</p>
+        </div>
+    }
 
     return <div className="tarjeta-episodio">
             <h4>{data?.name}</h4>

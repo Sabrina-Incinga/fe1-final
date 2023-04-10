@@ -15,6 +15,9 @@ import { accionBusqueda, accionPagina } from "../redux/personajeSlice";
 const PaginaInicio = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
+    /**
+     * Función que resetea el valor de busqueda y página en store
+     */
     const resetearBuscador = () => {
         dispatch(accionBusqueda(''));
         dispatch(accionPagina('reset'));

@@ -7,19 +7,25 @@ import { accionPagina } from '../../redux/personajeSlice';
  * 
  * 
  * 
- * @returns {JSX.Element} un JSX element 
+ * @returns {JSX.Element} un JSX que proporciona los botones para cambiar de página 
  */
 const Paginacion = (): JSX.Element => {
-    const dispatch = useAppDispatch()
-    const pagina = useAppSelector(state => state.personaje.pagina)
-    const next = useAppSelector(state => state.personaje.siguiente)
+    const dispatch = useAppDispatch();
+    const pagina = useAppSelector(state => state.personaje.pagina);
+    const next = useAppSelector(state => state.personaje.siguiente);
 
+    /**
+     * Función que llama a accionPagina del store y le envía un valor para sumar a la página
+     */
     const clickSiguiente = () => {
-        dispatch(accionPagina(1))
+        dispatch(accionPagina(1));
     }
 
+    /**
+     * Función que llama a accionPagina del store y le envía un valor para restar a la página
+     */
     const clickAnterior = () => {
-        dispatch(accionPagina(-1))
+        dispatch(accionPagina(-1));
     }
 
     return <div className="paginacion">

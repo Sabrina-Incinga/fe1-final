@@ -16,10 +16,7 @@ import { personaje } from '../../types/personaje.types';
 const GrillaPersonajes = (): JSX.Element => {
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const personajes = useAppSelector(state => state.personaje.personajes);
-    const favoritos = useAppSelector(state => state.personaje.favoritos);
-    const pagina = useAppSelector(state => state.personaje.pagina);
-    const busqueda = useAppSelector(state => state.personaje.busqueda)
+    const {personajes, favoritos, pagina, busqueda, error} = useAppSelector(state => state.personaje);
 
     /**
      * Función transforma un personaje en una tarjeta para renderizar
@@ -43,6 +40,12 @@ const GrillaPersonajes = (): JSX.Element => {
             dispatch(accionPagina('reset'));
         }
     }, [location, dispatch]);
+
+    if(error){
+        return <div>
+            <p>No se pudo cargar la información</p>
+        </div>
+    }
 
     return <div className="grilla-personajes">
         {location.pathname ==='/' ? personajes.map(mapper) : favoritos.map(mapper)}

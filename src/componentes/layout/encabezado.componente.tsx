@@ -6,7 +6,7 @@ import './encabezado.css';
  *
  * Uso: `<Encabezado />`
  *
- * @returns {JSX.Element}
+ * @returns {JSX.Element} Un JSX con el encabezado de la página
  */
 const Encabezado = (): JSX.Element => {
 

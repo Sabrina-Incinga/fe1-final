@@ -21,10 +21,16 @@ const TarjetaPersonaje = ({personaje}:props): JSX.Element => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    /**
+     * Función que maneja el cambio de estado del estado favorito de un personaje a través de dispatch
+     */
     const marcarFavorito = () => {
         dispatch(accionFavoritos(personaje));
     }
 
+    /**
+     * Función que redirecciona a la página detalle y envía los datos del personaje seleccionado a través de dispatch 
+     */
     const detallePersonaje = () => {
         dispatch(accionSeleccionado(personaje));
         navigate("/detalle");

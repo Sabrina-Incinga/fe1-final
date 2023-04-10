@@ -17,6 +17,9 @@ const PaginaDetalle = (): JSX.Element => {
     const personaje = useAppSelector(state => state.personaje.personajeSeleccionado);
     const dispatch = useAppDispatch();
 
+    /**
+     * Función que maneja el cambio de estado del estado favorito de un personaje a través de dispatch
+     */
     const marcarFavorito = () => {
         dispatch(accionFavoritos (personaje));
     }
